@@ -1,0 +1,106 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #222;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.heading h2{
+    text-align: center;
+    color: #fff;
+    font-size: 2em;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    0% {text-shadow: 0 0 5px red;}
+    14% {text-shadow: 0 0 5px orange;}
+    28% {text-shadow: 0 0 5px yellow;}
+    42% {text-shadow: 0 0 5px green;}
+    57% {text-shadow: 0 0 5px blue;}
+    71% {text-shadow: 0 0 5px indigo;}
+    85% {text-shadow: 0 0 5px violet;}
+    100% {text-shadow: 0 0 5px red;}
+    
+}
+
+.list{
+    display: flex;
+    gap: 10px;
+}
+
+.item{
+    transition: transform 0.3s ease-in-out;
+}
+
+.item img {
+    display: block;
+    width: 100px; /* Adjust as needed */
+    height: auto;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.item:hover {
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.list{
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+.list .item{
+    transition: .5s;
+    filter: brightness(0);
+}
+
+.list .item:hover{
+    filter:brightness(1);
+    transform: translateZ(200px);
+}
+/*
++ * : this returns the item to right of the element being hovered on.
+*/
+.list .item:hover + *{
+    filter: brightness(0.6);
+    transform: translateZ(150px) rotateY(40deg);
+}
+
+.list .item:hover + * + * {
+    filter: brightness(0.4);
+    transform: translateZ(70px) rotateY(20deg);
+}
+
+.list .item:hover + * + * + *{
+    filter: brightness(0.2);
+    transform: translateZ(30px) rotateY(10deg);
+}
+
+/*
+has(+ *) : this means find an item whose right position is the element being hovered over.
+*/
+
+.list .item:has(+ *:hover ){
+    filter: brightness(0.6);
+    transform: translateZ(150px) rotateY(-40deg);
+
+}
+
+.list .item:has(+ * + *:hover){
+    filter: brightness(0.4);
+    transform: translateZ(70px) rotateY(-20deg);
+} 
+
+.list .ite:has(+ * + * + *:hover){
+    filter: brightness(0.2);
+    transform: translateZ(30px) rotateY(-10deg);
+}
